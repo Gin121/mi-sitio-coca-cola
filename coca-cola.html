@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Unidos Somos Coca-Cola</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      color: #333;
+    }
+
+    header {
+      background-color: #e4002b;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #222;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 14px 20px;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background-color: #444;
+    }
+
+    section {
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .highlight {
+      color: #e4002b;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #222;
+      color: white;
+      padding: 20px;
+    }
+
+    .card {
+      background: #f2f2f2;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 10px;
+    }
+
+    .button {
+      background-color: #e4002b;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .button:hover {
+      background-color: #c20025;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    #mural {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    #mural div {
+      background: #ffeaea;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      width: 200px;
+    }
+
+    #listaAgradecimientos div, #listaValoraciones div {
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      width: 250px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Unidos Somos Coca-Cola</h1>
+  <p><em>Team Building para un Mejor Mañana</em></p>
+</header>
+
+<nav>
+  <a href="#team">¿Qué es Team Building?</a>
+  <a href="#avatar">Avatar</a>
+  <a href="#resolverConflictos">Conflictos</a>
+  <a href="#agradecimientos">Agradecimientos</a>
+  <a href="#valoraciones">Valoraciones</a>
+</nav>
+
+<section id="team">
+  <h2>¿Qué es Team Building?</h2>
+  <div class="card">
+    <p>“<span class="highlight">El team building</span> consiste en actividades que ayudan a los grupos a desarrollar su identidad y cohesión, lo que mejora la <strong>confianza</strong>, la <strong>comunicación</strong> y la <strong>cooperación</strong>.” - Robbins & Judge</p>
+  </div>
+  <div class="card">
+    <p>“Un Team Building implica actividades planificadas destinadas a mejorar el funcionamiento del equipo mediante la confianza y la comprensión mutua.” - West</p>
+  </div>
+</section>
+
+<section id="avatar">
+  <h2>🎨 Reto del Avatar Colaborativo</h2>
+  <form id="avatarForm">
+    <input type="text" id="nombreAvatar" placeholder="Tu nombre" required />
+    <input type="text" id="rolAvatar" placeholder="Tu rol (ej. operador, gerente)" required />
+    <input type="text" id="fraseAvatar" placeholder="¿Cómo contribuyes al equipo?" required />
+    <button class="button" type="submit">Crear Avatar</button>
+  </form>
+  <h3>🌟 Mural del Equipo</h3>
+  <div id="mural"></div>
+</section>
+
+<section id="resolverConflictos">
+  <h2>🤝 Actividad: Ponte en sus zapatos</h2>
+  <form id="conflictoForm">
+    <input type="text" id="nombreConflicto" placeholder="Tu nombre" required />
+    <select id="conflicto" onchange="mostrarConflicto()" required>
+      <option value="">-- Selecciona un conflicto --</option>
+      <option value="1">El corporativo cambia procesos sin avisar</option>
+      <option value="2">Los operadores no siguen los lineamientos</option>
+    </select>
+
+    <div id="situacion" style="display:none;">
+      <p id="descripcionConflicto"></p>
+      <button type="button" class="button" onclick="responder('empatica')">Responder con empatía</button>
+      <button type="button" class="button" onclick="responder('impulsiva')">Responder impulsivamente</button>
+    </div>
+
+    <div id="feedback"></div>
+  </form>
+
+  <h3>📋 Respuestas Recibidas</h3>
+  <ul id="resultados"></ul>
+</section>
+
+<section id="agradecimientos">
+  <h2>💌 Cadena de Agradecimientos 🙌</h2>
+  <form id="formAgradecimiento">
+    <input type="text" id="quienAgradece" placeholder="🙋‍♀ Tu nombre" required />
+    <input type="text" id="aQuien" placeholder="🤝 Agradezco a..." required />
+    <textarea id="mensajeAgradecimiento" rows="3" placeholder="📝 ¿Qué hizo que merezca tu agradecimiento?" required></textarea>
+    <button type="submit" class="button">💌 Enviar Agradecimiento</button>
+  </form>
+  <div id="listaAgradecimientos"></div>
+</section>
+
+<section id="valoraciones">
+  <h2>🏅 Valora el Trabajo de un Compañero</h2>
+  <form id="formValoracion">
+    <input type="text" id="quienValora" placeholder="🙋 Tu nombre" required />
+    <input type="text" id="aQuienValora" placeholder="👤 A quién valoras" required />
+    <input type="text" id="motivo" placeholder="🎯 ¿Qué valoras de su trabajo?" required />
+    <button type="submit" class="button">🏆 Enviar Valoración</button>
+  </form>
+  <div id="listaValoraciones" style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;"></div>
+</section>
+
+<footer>
+  <p>© 2025 Unidos Somos Coca-Cola - Proyecto de Innovación Social</p>
+</footer>
+
+<script>
+  document.getElementById('avatarForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const nombre = document.getElementById('nombreAvatar').value;
+    const rol = document.getElementById('rolAvatar').value;
+    const frase = document.getElementById('fraseAvatar').value;
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = \`
+      <h4>\${nombre}</h4>
+      <p><strong>Rol:</strong> \${rol}</p>
+      <p><em>"\${frase}"</em></p>
+    \`;
+    document.getElementById('mural').appendChild(card);
+    this.reset();
+  });
+
+  const conflictos = {
+    1: {
+      descripcion: "Eres un operador. El área corporativa ha cambiado la forma de llenar reportes sin consultarte.",
+      empatica: "Entiendo que buscan estandarizar procesos. ¿Podríamos alinear el cambio con nuestra operación?",
+      impulsiva: "¡Otra vez lo cambian sin avisar! No pienso seguir ese nuevo formato."
+    },
+    2: {
+      descripcion: "Eres del corporativo. Los operadores no siguen los lineamientos de seguridad.",
+      empatica: "Me acercaré con respeto a escuchar sus motivos y explicar la importancia del protocolo.",
+      impulsiva: "Esto es inaceptable. Les enviaré una advertencia sin más explicaciones."
+    }
+  };
+
+  function mostrarConflicto() {
+    const val = document.getElementById('conflicto').value;
+    const desc = document.getElementById('descripcionConflicto');
+    const situacion = document.getElementById('situacion');
+    if (val) {
+      desc.textContent = conflictos[val].descripcion;
+      situacion.style.display = 'block';
+    } else {
+      situacion.style.display = 'none';
+    }
+  }
+
+  function responder(tipo) {
+    const val = document.getElementById('conflicto').value;
+    const respuesta = conflictos[val][tipo];
+    document.getElementById('feedback').textContent = "Tu respuesta: " + respuesta;
+  }
+
+  document.getElementById('formAgradecimiento').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const quien = document.getElementById('quienAgradece').value;
+    const aQuien = document.getElementById('aQuien').value;
+    const mensaje = document.getElementById('mensajeAgradecimiento').value;
+    const div = document.createElement('div');
+    div.innerHTML = \`
+      <strong>\${quien}</strong> agradece a <strong>\${aQuien}</strong>:<p>"\${mensaje}"</p>
+    \`;
+    document.getElementById('listaAgradecimientos').appendChild(div);
+    this.reset();
+  });
+
+  document.getElementById('formValoracion').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const quien = document.getElementById('quienValora').value;
+    const aQuien = document.getElementById('aQuienValora').value;
+    const motivo = document.getElementById('motivo').value;
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.innerHTML = \`
+      <strong>\${quien}</strong> valora a <strong>\${aQuien}</strong>:<p>"\${motivo}"</p>
+    \`;
+    document.getElementById('listaValoraciones').appendChild(div);
+    this.reset();
+  });
+</script>
+</body>
+</html>
